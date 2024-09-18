@@ -1,79 +1,130 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Calling Screen with Redux
 
-# Getting Started
+This is a modular and reusable calling screen interface designed in React Native. The project includes chat message functionality, mute/unmute button, call-end action, and uses Redux for state management. The design follows a clean architecture with a centralized color scheme and common styles for consistent UI across components.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+- **Chat Integration**: Display chat messages between users with avatars.
+- **Redux State Management**: Manages chat messages and call state.
+- **Mute/Unmute**: Toggle mute functionality with state management.
+- **Reusability**: Reusable button and action components.
+- **Centralized Styles**: Consistent UI using centralized styles and colors.
+- **Expandable**: Can be extended to include more screens like Call Log, Profile, etc.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
-
-To start Metro, run the following command from the _root_ of your React Native project:
+## Project Structure
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+.
+├── assets
+│   └── icons           # Icons for buttons (mute, end call, etc.)
+├── src
+│   ├── components
+│   │   ├── MuteButton.js          # Mute button component
+│   │   ├── ChatBubble.js          # Chat bubble component
+│   │   ├── EndCallButton.js       # End Call button 
+│   │   └── index.js               # Index file for components
+│   ├── redux
+│   │   ├── actions.js             # Redux action creators
+│   │   ├── chatReducer.js         # Reducer to manage chat messages
+│   │   ├── store.js               # Store configuration for Redux
+│   ├── screens
+│   │   ├── CallScreen.js          # Main screen for calling interface
+│   │   └── index.js               # Index file for components
+│   ├── styles
+│   │   ├── colors.js              # Centralized color scheme
+│   │   ├── fonts.js               # Centralized fonts
+│   │   ├── commonStyles.js        # Common styles for reuse
+│   │   └── index.js               # Index file for components
+│   ├── utils
+│   │   └── format.js              # Utility functions (if required)
+│   └── App.js                     # Main app entry point
+├── .gitignore
+├── package.json                   # Project dependencies and scripts
+└── README.md                      # Project documentation
 ```
 
-## Step 2: Start your Application
+## Installation
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+### Prerequisites
 
-### For Android
+Make sure you have the following installed on your system:
+
+- **Node.js** (v14.x or above)
+- **npm** (v6.x or above)
+- **React Native CLI** (for running the app on iOS/Android)
+- **Xcode** (for iOS development)
+- **Android Studio** (for Android development)
+
+### Steps to Set Up the Project
+
+1. **Clone the repository**:
+   ```bash
+   git clone git@github.com:shoaibamin-dev/ReactNativePhoneUI.git
+
+Navigate to the project directory:
 
 ```bash
-# using npm
+cd ReactNativePhoneUI
+Install the dependencies:
+```
+
+
+```bash
+npm install 
+```
+Link necessary dependencies for iOS (React Native <= 0.60):
+
+```bash
+npx react-native link react-native-vector-icons
+```
+
+Link necessary dependencies for iOS (React Native > 0.60):
+
+```bash
+npx react-native-asset            
+```
+Run the project on your target platform:
+
+For iOS:
+
+```bash
+npx pod-install && npm run ios
+```
+For Android:
+
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
+Fonts Installation
+To use custom fonts, follow these steps:
 
-### For iOS
+Place your font files (e.g., .ttf or .otf) in the assets/fonts directory.
+
+In your react-native.config.js, ensure that you have the fonts set up:
+
+javascript
+Copy code
+module.exports = {
+  assets: ['./assets/fonts'],
+};
+Run the linking command again to link the fonts:
 
 ```bash
-# using npm
-npm run ios
+npx react-native link
+```
+Use the font in your styles. For example:
 
-# OR using Yarn
-yarn ios
+javascript
+```bash
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: 'YourCustomFontName',
+  },
+});
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+### Key Highlights in Markdown:
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+1. **Code blocks** are properly formatted using triple backticks (\`\`\`bash\`\`\` or \`\`\`javascript\`\`\`).
+2. **Steps** are clearly numbered for easy follow-through.
+3. Each section (prerequisites, steps, and fonts) is broken into **clear subsections** for clarity.
